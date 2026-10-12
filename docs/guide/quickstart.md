@@ -11,7 +11,7 @@
 Start with the foundation package, then add the packages that own the capabilities used by your service:
 
 ```bash
-dotnet add package Squirrel.Core
+dotnet add package Squirrel
 dotnet add package Squirrel.Web
 dotnet add package Squirrel.OpenTelemetry
 dotnet add package Squirrel.HealthCheck
