@@ -49,6 +49,9 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.version.outputs.version }}
+      assembly_version: ${{ steps.version.outputs.assembly_version }}
+      informational_version: ${{ steps.version.outputs.informational_version }}
+      environment: ${{ steps.version.outputs.environment }}
 
     steps:
       - name: Check out repository
@@ -99,10 +102,14 @@ jobs:
           done
 
       - name: Pack Squirrel packages
+        env:
+          PACKAGE_VERSION: ${{ needs['calculate-version'].outputs.version }}
+          ASSEMBLY_VERSION: ${{ needs['calculate-version'].outputs.assembly_version }}
+          INFORMATIONAL_VERSION: ${{ needs['calculate-version'].outputs.informational_version }}
         run: |
           mkdir -p artifacts
           for project in src/*/*.csproj; do
-            dotnet pack "$project" --configuration Release --no-restore --output artifacts -p:PublicRelease=true -p:PackageVersion="${{ needs['calculate-version'].outputs.version }}"
+            dotnet pack "$project" --configuration Release --no-restore --output artifacts -p:PublicRelease=true -p:PackageVersion="$PACKAGE_VERSION" -p:AssemblyVersion="$ASSEMBLY_VERSION" -p:InformationalVersion="$INFORMATIONAL_VERSION"
           done
 
       - name: Publish to NuGet.org

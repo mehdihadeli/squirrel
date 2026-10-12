@@ -23,7 +23,7 @@ Install the packages your service needs and compose their registrations. Squirre
 From an ASP.NET Core project, install the core, web, observability, health-check, resilience, and validation packages:
 
 ```bash
-dotnet add package Squirrel.Core
+dotnet add package Squirrel
 dotnet add package Squirrel.Web
 dotnet add package Squirrel.OpenTelemetry
 dotnet add package Squirrel.HealthCheck
@@ -92,7 +92,7 @@ Each package can be installed independently. The badges show the latest stable v
 | Package | Description | Latest NuGet |
 | --- | --- | --- |
 | `Squirrel.Abstractions` | Shared contracts for commands, queries, events, messages, repositories, paging, persistence, serialization, and web modules. | [![NuGet Squirrel.Abstractions](https://img.shields.io/nuget/v/Squirrel.Abstractions.svg)](https://www.nuget.org/packages/Squirrel.Abstractions/) |
-| `Squirrel.Core` | Common application and domain services, command and query support, options, exceptions, validation helpers, paging, and dependency-registration extensions. | [![NuGet Squirrel.Core](https://img.shields.io/nuget/v/Squirrel.Core.svg)](https://www.nuget.org/packages/Squirrel.Core/) |
+| `Squirrel` | Common application and domain services, command and query support, options, exceptions, validation helpers, paging, and dependency-registration extensions. | [![NuGet Squirrel](https://img.shields.io/nuget/v/Squirrel.svg)](https://www.nuget.org/packages/Squirrel/) |
 | `Squirrel.Web` | ASP.NET Core conventions for CORS, compression, API versioning, rate limiting, problem details, minimal APIs, and endpoint mapping. | [![NuGet Squirrel.Web](https://img.shields.io/nuget/v/Squirrel.Web.svg)](https://www.nuget.org/packages/Squirrel.Web/) |
 | `Squirrel.Security` | JWT bearer and API-key authentication helpers for HTTP APIs. | [![NuGet Squirrel.Security](https://img.shields.io/nuget/v/Squirrel.Security.svg)](https://www.nuget.org/packages/Squirrel.Security/) |
 | `Squirrel.HealthCheck` | Default health-check registration and endpoint conventions for service health monitoring. | [![NuGet Squirrel.HealthCheck](https://img.shields.io/nuget/v/Squirrel.HealthCheck.svg)](https://www.nuget.org/packages/Squirrel.HealthCheck/) |
@@ -124,7 +124,7 @@ The package family separates contracts, reusable application code, and technolog
 | Area | Responsibility |
 | --- | --- |
 | Contracts | `Squirrel.Abstractions` defines shared interfaces and models without requiring infrastructure implementations. |
-| Application building blocks | `Squirrel.Core` supplies domain types, buses, event handling, pipelines, persistence helpers, and shared services. |
+| Application building blocks | `Squirrel` supplies domain types, buses, event handling, pipelines, persistence helpers, and shared services. |
 | HTTP and platform behavior | Web, security, validation, health-check, and resilience packages add service-facing conventions. |
 | Infrastructure adapters | Persistence, Wolverine, caching, email, and serialization packages connect application code to selected technologies. |
 | Observability | OpenTelemetry and Serilog packages register instrumentation, exporters, logging, and context enrichment. |

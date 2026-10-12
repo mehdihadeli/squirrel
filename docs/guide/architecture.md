@@ -4,7 +4,7 @@ Squirrel is organized as small libraries with explicit project references. Lower
 
 ```mermaid
 flowchart TD
-  A[Squirrel.Abstractions] --> C[Squirrel.Core]
+  A[Squirrel.Abstractions] --> C[Squirrel]
   C --> I[Integration libraries]
   C --> P[Persistence libraries]
   C --> W[Squirrel.Web]
@@ -17,7 +17,7 @@ flowchart TD
 ## Package boundaries
 
 - `Squirrel.Abstractions` contains contracts and shared models.
-- `Squirrel.Core` contains common application, domain, messaging, and event-store behavior.
+- `Squirrel` contains common application, domain, messaging, and event-store behavior; its source project and namespaces remain `Squirrel.Core`.
 - Persistence packages integrate PostgreSQL, MongoDB, Marten, EventStoreDB, and Azure data stores.
 - Integration packages connect application code to Wolverine, caching, email, security, health checks, and observability tooling.
 - `Squirrel.Web` contains ASP.NET Core integration helpers.

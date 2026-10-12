@@ -1,13 +1,13 @@
 # Packages
 
-Squirrel publishes a coordinated `Squirrel.*` NuGet family. Install only the packages needed by each service; package registrations are designed to compose through `IHostApplicationBuilder` and `IServiceCollection`.
+Squirrel publishes the foundation package `Squirrel` and a coordinated `Squirrel.*` NuGet family. Install only the packages needed by each service; package registrations are designed to compose through `IHostApplicationBuilder` and `IServiceCollection`.
 
 ## Foundations
 
-| Package                       | Purpose                                                                           | Details                                                |
-| ----------------------------- | --------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| Package | Purpose | Details |
+| --- | --- | --- |
 | `Squirrel.Abstractions` | Shared contracts for commands, queries, events, persistence, paging, and modules. | [Read the component guide](../components/abstractions) |
-| `Squirrel.Core`         | Core buses, domain services, options, exceptions, and common extensions.          | [Read the component guide](../components/core)         |
+| `Squirrel` | Core buses, domain services, options, exceptions, and common extensions. | [Read the component guide](../components/core) |
 
 ## Platform
 

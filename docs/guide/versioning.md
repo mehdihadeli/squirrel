@@ -59,9 +59,17 @@ all source projects, and runs unit and integration tests. After those checks:
 - Release Drafter updates the matching draft; only stable tags publish it.
 
 The workflow calculates the release value in `calculate-version.sh`, passes it
-to `dotnet pack` as `PackageVersion`, and never rewrites `version.json` in CI.
+to `dotnet pack` as `PackageVersion` together with the calculated assembly and
+informational versions, and never rewrites `version.json` in CI. The publish
+job runs for `v*` tags or preview versions on `main`, excluding `preview.0`.
 Release tags must be `vMAJOR.MINOR.PATCH` or `vMAJOR.MINOR.PATCH-rc.N` and must
 match the NBGV version calculated for that commit.
+
+For example, preview ordinal `4` on release line `1.4.0`, UTC date `26284`,
+and workflow run `9` produce `Squirrel.Core.1.4.0-preview.4.26284.9.nupkg`.
+A matching `v1.4.0-rc.4` tag produces
+`Squirrel.Core.1.4.0-rc.4.26284.9.nupkg`; stable tag `v1.4.0` produces
+`Squirrel.Core.1.4.0.nupkg`.
 
 ## Publish an approved tag
 
