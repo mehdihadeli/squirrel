@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
-  <PropertyGroup Condition="$([System.String]::Copy('$(MSBuildProjectDirectory)').Contains('\src\'))">
+  <PropertyGroup Condition="$([System.String]::Copy('$(MSBuildProjectDirectory)').Contains('\src\')) Or $([System.String]::Copy('$(MSBuildProjectDirectory)').Contains('/src/'))">
     <IsPackable>true</IsPackable>
     <PackageId Condition="'$(PackageId)' == ''">$(MSBuildProjectName)</PackageId>
     <Authors Condition="'$(Authors)' == ''">Squirrel contributors</Authors>
