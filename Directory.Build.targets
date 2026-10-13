@@ -10,4 +10,11 @@
     <RepositoryUrl Condition="'$(RepositoryUrl)' == ''">https://github.com/mehdihadeli/Squirrel</RepositoryUrl>
     <RepositoryType Condition="'$(RepositoryType)' == ''">git</RepositoryType>
   </PropertyGroup>
+
+  <Target Name="ApplyReleasePackageVersion" AfterTargets="GetBuildVersion" Condition="'$(ReleasePackageVersion)' != ''">
+    <PropertyGroup>
+      <PackageVersion>$(ReleasePackageVersion)</PackageVersion>
+      <NuGetPackageVersion>$(ReleasePackageVersion)</NuGetPackageVersion>
+    </PropertyGroup>
+  </Target>
 </Project>
