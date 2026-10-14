@@ -75,7 +75,7 @@ jobs:
 
   publish:
     name: Publish packages and release assets
-    if: startsWith(github.ref, 'refs/tags/v') || (github.ref == 'refs/heads/main' && needs['calculate-version'].outputs.environment == 'dev')
+    if: startsWith(github.ref, 'refs/tags/v')
     needs:
       - build-test
       - calculate-version
