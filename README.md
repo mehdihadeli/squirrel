@@ -1,7 +1,7 @@
 # 🐿️ Squirrel
 
 <p align="center">
-  <img src="assets/squirrel.png" alt="Squirrel package brand" width="220">
+  <img src="assets/squirrel.png" alt="Squirrel package brand" width="320">
 </p>
 
 Reusable infrastructure building blocks for .NET microservices.
