@@ -1,5 +1,9 @@
 # 🐿️ Squirrel
 
+<p align="center">
+  <img src="assets/squirrel.png" alt="Squirrel package brand" width="220">
+</p>
+
 Reusable infrastructure building blocks for .NET microservices.
 
 Squirrel is a collection of focused NuGet packages for persistence, messaging, authentication, resilience, health checks, logging, tracing, validation, and caching. It gives services shared infrastructure conventions while keeping application code on standard .NET hosting, dependency injection, configuration, and middleware patterns.
@@ -23,7 +27,7 @@ Install the packages your service needs and compose their registrations. Squirre
 From an ASP.NET Core project, install the core, web, observability, health-check, resilience, and validation packages:
 
 ```bash
-dotnet add package Squirrel
+dotnet add package Squirrel.CoreKit
 dotnet add package Squirrel.Web
 dotnet add package Squirrel.OpenTelemetry
 dotnet add package Squirrel.HealthCheck
@@ -92,7 +96,7 @@ Each package can be installed independently. The badges show the latest stable v
 | Package | Description | Latest NuGet |
 | --- | --- | --- |
 | `Squirrel.Abstractions` | Shared contracts for commands, queries, events, messages, repositories, paging, persistence, serialization, and web modules. | [![NuGet Squirrel.Abstractions](https://img.shields.io/nuget/v/Squirrel.Abstractions.svg)](https://www.nuget.org/packages/Squirrel.Abstractions/) |
-| `Squirrel` | Common application and domain services, command and query support, options, exceptions, validation helpers, paging, and dependency-registration extensions. | [![NuGet Squirrel](https://img.shields.io/nuget/v/Squirrel.svg)](https://www.nuget.org/packages/Squirrel/) |
+| `Squirrel.CoreKit` | Common application and domain services, command and query support, options, exceptions, validation helpers, paging, and dependency-registration extensions. | [![NuGet Squirrel.CoreKit](https://img.shields.io/nuget/v/Squirrel.CoreKit.svg)](https://www.nuget.org/packages/Squirrel.CoreKit/) |
 | `Squirrel.Web` | ASP.NET Core conventions for CORS, compression, API versioning, rate limiting, problem details, minimal APIs, and endpoint mapping. | [![NuGet Squirrel.Web](https://img.shields.io/nuget/v/Squirrel.Web.svg)](https://www.nuget.org/packages/Squirrel.Web/) |
 | `Squirrel.Security` | JWT bearer and API-key authentication helpers for HTTP APIs. | [![NuGet Squirrel.Security](https://img.shields.io/nuget/v/Squirrel.Security.svg)](https://www.nuget.org/packages/Squirrel.Security/) |
 | `Squirrel.HealthCheck` | Default health-check registration and endpoint conventions for service health monitoring. | [![NuGet Squirrel.HealthCheck](https://img.shields.io/nuget/v/Squirrel.HealthCheck.svg)](https://www.nuget.org/packages/Squirrel.HealthCheck/) |

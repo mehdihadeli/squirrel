@@ -5,7 +5,7 @@ Application and domain building blocks built on the abstractions package.
 ## Install
 
 ```bash
-dotnet add package Squirrel
+dotnet add package Squirrel.CoreKit
 ```
 
 The NuGet package is named `Squirrel`. The source project, assembly, and namespaces remain `Squirrel.Core`.
