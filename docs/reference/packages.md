@@ -1,13 +1,13 @@
 # Packages
 
-Squirrel publishes the foundation package `Squirrel` and a coordinated `Squirrel.*` NuGet family. Install only the packages needed by each service; package registrations are designed to compose through `IHostApplicationBuilder` and `IServiceCollection`.
+Squirrel publishes the foundation package `Squirrel.CoreKit` and a coordinated `Squirrel.*` NuGet family. Install only the packages needed by each service; package registrations are designed to compose through `IHostApplicationBuilder` and `IServiceCollection`.
 
 ## Foundations
 
 | Package | Purpose | Details |
 | --- | --- | --- |
 | `Squirrel.Abstractions` | Shared contracts for commands, queries, events, persistence, paging, and modules. | [Read the component guide](../components/abstractions) |
-| `Squirrel` | Core buses, domain services, options, exceptions, and common extensions. | [Read the component guide](../components/core) |
+| `Squirrel.CoreKit` | Core buses, domain services, options, exceptions, and common extensions. | [Read the component guide](../components/core) |
 
 ## Platform
 
@@ -24,6 +24,7 @@ Squirrel publishes the foundation package `Squirrel` and a coordinated `Squirrel
 | Package                                           | Purpose                                                                  | Details                                                                     |
 | ------------------------------------------------- | ------------------------------------------------------------------------ | --------------------------------------------------------------------------- |
 | `Squirrel.Integration.Wolverine`            | Wolverine and RabbitMQ event bus integration.                            | [Read the component guide](../components/wolverine)                         |
+| `Squirrel.Integration.Wolverine.InMemory`   | In-process Wolverine event bus and local queues, with optional PostgreSQL durability. | [Read the component guide](../components/wolverine)                         |
 | `Squirrel.Persistence.EfCore.Postgres`      | PostgreSQL EF Core context, repositories, unit of work, and migrations.  | [Read the component guide](../components/persistence-efcore-postgres)       |
 | `Squirrel.Persistence.EfCore.AzurePostgres` | Azure PostgreSQL package area.                                           | [Read the component guide](../components/persistence-efcore-azure-postgres) |
 | `Squirrel.Persistence.EfCore.AzureCosmosDB` | Azure Cosmos DB persistence package area.                                | [Read the component guide](../components/persistence-efcore-azure-cosmosdb) |
