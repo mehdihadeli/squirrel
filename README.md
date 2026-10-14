@@ -10,6 +10,12 @@ Squirrel is a collection of focused NuGet packages for persistence, messaging, a
 
 Install the packages your service needs and compose their registrations. Squirrel is a toolkit, not an application framework that controls your architecture.
 
+<p>
+  <a href="https://www.nuget.org/packages?q=Squirrel"><img src="https://img.shields.io/nuget/v/Squirrel.CoreKit.svg?style=flat" alt="NuGet version" height="28"></a>
+  <a href="https://github.com/mehdihadeli/squirrel"><img src="https://img.shields.io/badge/.NET-10.0-512BD4?style=flat" alt=".NET 10" height="28"></a>
+  <a href="docs/"><img src="https://img.shields.io/badge/docs-component_guides-0A7EA4?style=flat" alt="Component guides" height="28"></a>
+</p>
+
 [Quick Start](#quick-start) · [Features](#features) · [Packages](#packages) · [Architecture](#architecture) · [Documentation](#documentation)
 
 > [!IMPORTANT]
@@ -55,6 +61,20 @@ app.Run();
 > [!TIP]
 > Start with the capabilities your service uses. Add persistence, messaging, caching, or authentication separately as needed.
 
+## Package Selection
+
+Use the smallest package set that matches your service. Packages are independently installable and share conventions through `Squirrel.Abstractions`.
+
+| Service need | Start with | Add when needed |
+| --- | --- | --- |
+| HTTP API | `Squirrel.Web`, `Squirrel.Validation`, `Squirrel.HealthCheck` | `Squirrel.Security`, `Squirrel.OpenApi` |
+| Application and domain logic | `Squirrel.Abstractions`, `Squirrel.CoreKit` | `Squirrel.Validation` |
+| Database-backed service | `Squirrel.Persistence.EfCore.Postgres` | `Squirrel.Persistence.Marten`, `Squirrel.Persistence.Mongo`, or `Squirrel.Persistence.EventStoreDB` |
+| Messaging | `Squirrel.Integration.Wolverine.InMemory` | `Squirrel.Integration.Wolverine` for RabbitMQ |
+| Production operations | `Squirrel.OpenTelemetry`, `Squirrel.SerilogLogging`, `Squirrel.Resiliency` | `Squirrel.AspireIntegrations` for local orchestration |
+
+Install only the rows your service uses. Each package's component guide documents its required configuration, registrations, and optional integrations.
+
 ## 🧰 Common Usage
 
 ### PostgreSQL and RabbitMQ
@@ -91,33 +111,33 @@ builder.AddWolverineEventBus(
 
 ## Packages
 
-Each package can be installed independently. The badges show the latest stable version reported by NuGet; click a badge to open the package page without pinning it to a release.
+Each package can be installed independently. Use the short descriptions to find the right capability, then select the blue NuGet badge for the latest stable version and package page.
 
-| Package | Description | Latest NuGet |
+| Package | Best for | NuGet |
 | --- | --- | --- |
-| `Squirrel.Abstractions` | Shared contracts for commands, queries, events, messages, repositories, paging, persistence, serialization, and web modules. | [![NuGet Squirrel.Abstractions](https://img.shields.io/nuget/v/Squirrel.Abstractions.svg)](https://www.nuget.org/packages/Squirrel.Abstractions/) |
-| `Squirrel.CoreKit` | Common application and domain services, command and query support, options, exceptions, validation helpers, paging, and dependency-registration extensions. | [![NuGet Squirrel.CoreKit](https://img.shields.io/nuget/v/Squirrel.CoreKit.svg)](https://www.nuget.org/packages/Squirrel.CoreKit/) |
-| `Squirrel.Web` | ASP.NET Core conventions for CORS, compression, API versioning, rate limiting, problem details, minimal APIs, and endpoint mapping. | [![NuGet Squirrel.Web](https://img.shields.io/nuget/v/Squirrel.Web.svg)](https://www.nuget.org/packages/Squirrel.Web/) |
-| `Squirrel.Security` | JWT bearer and API-key authentication helpers for HTTP APIs. | [![NuGet Squirrel.Security](https://img.shields.io/nuget/v/Squirrel.Security.svg)](https://www.nuget.org/packages/Squirrel.Security/) |
-| `Squirrel.HealthCheck` | Default health-check registration and endpoint conventions for service health monitoring. | [![NuGet Squirrel.HealthCheck](https://img.shields.io/nuget/v/Squirrel.HealthCheck.svg)](https://www.nuget.org/packages/Squirrel.HealthCheck/) |
-| `Squirrel.Resiliency` | Service discovery and HTTP resilience with timeouts, retries, and circuit breakers. | [![NuGet Squirrel.Resiliency](https://img.shields.io/nuget/v/Squirrel.Resiliency.svg)](https://www.nuget.org/packages/Squirrel.Resiliency/) |
-| `Squirrel.Validation` | FluentValidation assembly scanning and dependency-injection registration for request and command validators. | [![NuGet Squirrel.Validation](https://img.shields.io/nuget/v/Squirrel.Validation.svg)](https://www.nuget.org/packages/Squirrel.Validation/) |
-| `Squirrel.Email` | Email delivery abstraction with provider integrations such as SendGrid. | [![NuGet Squirrel.Email](https://img.shields.io/nuget/v/Squirrel.Email.svg)](https://www.nuget.org/packages/Squirrel.Email/) |
-| `Squirrel.Caching` | Cache abstractions, hybrid caching support, Redis integration contracts, and cache invalidation patterns. | [![NuGet Squirrel.Caching](https://img.shields.io/nuget/v/Squirrel.Caching.svg)](https://www.nuget.org/packages/Squirrel.Caching/) |
-| `Squirrel.Caching.AzureRedis` | Azure Redis hosting and client integration for Azure Redis or Azure Managed Redis. | [![NuGet Squirrel.Caching.AzureRedis](https://img.shields.io/nuget/v/Squirrel.Caching.AzureRedis.svg)](https://www.nuget.org/packages/Squirrel.Caching.AzureRedis/) |
-| `Squirrel.Serialization` | MemoryPack serialization registration for binary messages and data payloads. | [![NuGet Squirrel.Serialization](https://img.shields.io/nuget/v/Squirrel.Serialization.svg)](https://www.nuget.org/packages/Squirrel.Serialization/) |
-| `Squirrel.Integration.Wolverine` | Wolverine and RabbitMQ integration with handler discovery, message topology, and durable messaging support. | [![NuGet Squirrel.Integration.Wolverine](https://img.shields.io/nuget/v/Squirrel.Integration.Wolverine.svg)](https://www.nuget.org/packages/Squirrel.Integration.Wolverine/) |
-| `Squirrel.Integration.Wolverine.InMemory` | Wolverine in-process event bus and local queues, with optional PostgreSQL-backed durability and no RabbitMQ dependency. | [![NuGet Squirrel.Integration.Wolverine.InMemory](https://img.shields.io/nuget/v/Squirrel.Integration.Wolverine.InMemory.svg)](https://www.nuget.org/packages/Squirrel.Integration.Wolverine.InMemory/) |
-| `Squirrel.Persistence.EfCore.Postgres` | PostgreSQL EF Core setup, repositories, unit of work, migrations, naming conventions, retries, and persistence interceptors. | [![NuGet Squirrel.Persistence.EfCore.Postgres](https://img.shields.io/nuget/v/Squirrel.Persistence.EfCore.Postgres.svg)](https://www.nuget.org/packages/Squirrel.Persistence.EfCore.Postgres/) |
-| `Squirrel.Persistence.EfCore.AzurePostgres` | Reserved package area for Azure PostgreSQL persistence; currently a placeholder without a provider implementation. | [![NuGet Squirrel.Persistence.EfCore.AzurePostgres](https://img.shields.io/nuget/v/Squirrel.Persistence.EfCore.AzurePostgres.svg)](https://www.nuget.org/packages/Squirrel.Persistence.EfCore.AzurePostgres/) |
-| `Squirrel.Persistence.EfCore.AzureCosmosDB` | Reserved package area for Azure Cosmos DB persistence; currently a placeholder without a provider implementation. | [![NuGet Squirrel.Persistence.EfCore.AzureCosmosDB](https://img.shields.io/nuget/v/Squirrel.Persistence.EfCore.AzureCosmosDB.svg)](https://www.nuget.org/packages/Squirrel.Persistence.EfCore.AzureCosmosDB/) |
-| `Squirrel.Persistence.Mongo` | MongoDB context, repositories, unit of work, health checks, and tracing integration. | [![NuGet Squirrel.Persistence.Mongo](https://img.shields.io/nuget/v/Squirrel.Persistence.Mongo.svg)](https://www.nuget.org/packages/Squirrel.Persistence.Mongo/) |
-| `Squirrel.Persistence.Marten` | Marten document storage and event sourcing on PostgreSQL, including event streams, projections, and subscriptions. | [![NuGet Squirrel.Persistence.Marten](https://img.shields.io/nuget/v/Squirrel.Persistence.Marten.svg)](https://www.nuget.org/packages/Squirrel.Persistence.Marten/) |
-| `Squirrel.Persistence.EventStoreDB` | EventStoreDB client, event-sourcing integration, subscriptions, checkpoints, tracing, and health checks. | [![NuGet Squirrel.Persistence.EventStoreDB](https://img.shields.io/nuget/v/Squirrel.Persistence.EventStoreDB.svg)](https://www.nuget.org/packages/Squirrel.Persistence.EventStoreDB/) |
-| `Squirrel.OpenTelemetry` | OpenTelemetry tracing, metrics, logging, exporters, and instrumentation for common dependencies. | [![NuGet Squirrel.OpenTelemetry](https://img.shields.io/nuget/v/Squirrel.OpenTelemetry.svg)](https://www.nuget.org/packages/Squirrel.OpenTelemetry/) |
-| `Squirrel.OpenApi` | Swagger, ASP.NET OpenAPI, API versioning documentation, Scalar, and AsyncAPI support. | [![NuGet Squirrel.OpenApi](https://img.shields.io/nuget/v/Squirrel.OpenApi.svg)](https://www.nuget.org/packages/Squirrel.OpenApi/) |
-| `Squirrel.SerilogLogging` | Serilog setup, request enrichment, correlation data, baggage enrichment, and common sinks. | [![NuGet Squirrel.SerilogLogging](https://img.shields.io/nuget/v/Squirrel.SerilogLogging.svg)](https://www.nuget.org/packages/Squirrel.SerilogLogging/) |
-| `Squirrel.AspireIntegrations` | .NET Aspire resources for databases, caches, RabbitMQ, EventStoreDB, Elasticsearch, and observability tools such as Grafana, Jaeger, Loki, Prometheus, Tempo, and Zipkin. | [![NuGet Squirrel.AspireIntegrations](https://img.shields.io/nuget/v/Squirrel.AspireIntegrations.svg)](https://www.nuget.org/packages/Squirrel.AspireIntegrations/) |
+| `Squirrel.Abstractions` | Shared contracts and models for application boundaries. | <a href="https://www.nuget.org/packages/Squirrel.Abstractions/"><img src="https://img.shields.io/nuget/v/Squirrel.Abstractions.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Abstractions" height="28"></a> |
+| `Squirrel.CoreKit` | Domain services, buses, options, exceptions, and core registrations. | <a href="https://www.nuget.org/packages/Squirrel.CoreKit/"><img src="https://img.shields.io/nuget/v/Squirrel.CoreKit.svg?style=flat&color=0078D4" alt="NuGet Squirrel.CoreKit" height="28"></a> |
+| `Squirrel.Web` | ASP.NET Core API conventions and endpoint composition. | <a href="https://www.nuget.org/packages/Squirrel.Web/"><img src="https://img.shields.io/nuget/v/Squirrel.Web.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Web" height="28"></a> |
+| `Squirrel.Security` | JWT bearer and API-key authentication. | <a href="https://www.nuget.org/packages/Squirrel.Security/"><img src="https://img.shields.io/nuget/v/Squirrel.Security.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Security" height="28"></a> |
+| `Squirrel.HealthCheck` | Health-check registration and endpoint conventions. | <a href="https://www.nuget.org/packages/Squirrel.HealthCheck/"><img src="https://img.shields.io/nuget/v/Squirrel.HealthCheck.svg?style=flat&color=0078D4" alt="NuGet Squirrel.HealthCheck" height="28"></a> |
+| `Squirrel.Resiliency` | Service discovery, retries, timeouts, and circuit breakers. | <a href="https://www.nuget.org/packages/Squirrel.Resiliency/"><img src="https://img.shields.io/nuget/v/Squirrel.Resiliency.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Resiliency" height="28"></a> |
+| `Squirrel.Validation` | FluentValidation discovery and dependency injection. | <a href="https://www.nuget.org/packages/Squirrel.Validation/"><img src="https://img.shields.io/nuget/v/Squirrel.Validation.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Validation" height="28"></a> |
+| `Squirrel.Email` | Email delivery abstraction and provider integrations. | <a href="https://www.nuget.org/packages/Squirrel.Email/"><img src="https://img.shields.io/nuget/v/Squirrel.Email.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Email" height="28"></a> |
+| `Squirrel.Caching` | Cache abstractions, hybrid caching, and invalidation. | <a href="https://www.nuget.org/packages/Squirrel.Caching/"><img src="https://img.shields.io/nuget/v/Squirrel.Caching.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Caching" height="28"></a> |
+| `Squirrel.Caching.AzureRedis` | Azure Redis hosting and client integration. | <a href="https://www.nuget.org/packages/Squirrel.Caching.AzureRedis/"><img src="https://img.shields.io/nuget/v/Squirrel.Caching.AzureRedis.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Caching.AzureRedis" height="28"></a> |
+| `Squirrel.Serialization` | MemoryPack serializer registration. | <a href="https://www.nuget.org/packages/Squirrel.Serialization/"><img src="https://img.shields.io/nuget/v/Squirrel.Serialization.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Serialization" height="28"></a> |
+| `Squirrel.Integration.Wolverine` | Wolverine messaging and RabbitMQ integration. | <a href="https://www.nuget.org/packages/Squirrel.Integration.Wolverine/"><img src="https://img.shields.io/nuget/v/Squirrel.Integration.Wolverine.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Integration.Wolverine" height="28"></a> |
+| `Squirrel.Integration.Wolverine.InMemory` | In-process Wolverine bus and durable local queues. | <a href="https://www.nuget.org/packages/Squirrel.Integration.Wolverine.InMemory/"><img src="https://img.shields.io/nuget/v/Squirrel.Integration.Wolverine.InMemory.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Integration.Wolverine.InMemory" height="28"></a> |
+| `Squirrel.Persistence.EfCore.Postgres` | PostgreSQL EF Core persistence and repositories. | <a href="https://www.nuget.org/packages/Squirrel.Persistence.EfCore.Postgres/"><img src="https://img.shields.io/nuget/v/Squirrel.Persistence.EfCore.Postgres.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Persistence.EfCore.Postgres" height="28"></a> |
+| `Squirrel.Persistence.EfCore.AzurePostgres` | Reserved Azure PostgreSQL package placeholder. | <a href="https://www.nuget.org/packages/Squirrel.Persistence.EfCore.AzurePostgres/"><img src="https://img.shields.io/nuget/v/Squirrel.Persistence.EfCore.AzurePostgres.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Persistence.EfCore.AzurePostgres" height="28"></a> |
+| `Squirrel.Persistence.EfCore.AzureCosmosDB` | Reserved Azure Cosmos DB package placeholder. | <a href="https://www.nuget.org/packages/Squirrel.Persistence.EfCore.AzureCosmosDB/"><img src="https://img.shields.io/nuget/v/Squirrel.Persistence.EfCore.AzureCosmosDB.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Persistence.EfCore.AzureCosmosDB" height="28"></a> |
+| `Squirrel.Persistence.Mongo` | MongoDB context, repositories, and health checks. | <a href="https://www.nuget.org/packages/Squirrel.Persistence.Mongo/"><img src="https://img.shields.io/nuget/v/Squirrel.Persistence.Mongo.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Persistence.Mongo" height="28"></a> |
+| `Squirrel.Persistence.Marten` | Marten documents, event streams, and projections. | <a href="https://www.nuget.org/packages/Squirrel.Persistence.Marten/"><img src="https://img.shields.io/nuget/v/Squirrel.Persistence.Marten.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Persistence.Marten" height="28"></a> |
+| `Squirrel.Persistence.EventStoreDB` | EventStoreDB client, subscriptions, and checkpoints. | <a href="https://www.nuget.org/packages/Squirrel.Persistence.EventStoreDB/"><img src="https://img.shields.io/nuget/v/Squirrel.Persistence.EventStoreDB.svg?style=flat&color=0078D4" alt="NuGet Squirrel.Persistence.EventStoreDB" height="28"></a> |
+| `Squirrel.OpenTelemetry` | OpenTelemetry tracing, metrics, logging, and exporters. | <a href="https://www.nuget.org/packages/Squirrel.OpenTelemetry/"><img src="https://img.shields.io/nuget/v/Squirrel.OpenTelemetry.svg?style=flat&color=0078D4" alt="NuGet Squirrel.OpenTelemetry" height="28"></a> |
+| `Squirrel.OpenApi` | Swagger, Scalar, API versioning, and AsyncAPI support. | <a href="https://www.nuget.org/packages/Squirrel.OpenApi/"><img src="https://img.shields.io/nuget/v/Squirrel.OpenApi.svg?style=flat&color=0078D4" alt="NuGet Squirrel.OpenApi" height="28"></a> |
+| `Squirrel.SerilogLogging` | Serilog setup, enrichment, correlation, and sinks. | <a href="https://www.nuget.org/packages/Squirrel.SerilogLogging/"><img src="https://img.shields.io/nuget/v/Squirrel.SerilogLogging.svg?style=flat&color=0078D4" alt="NuGet Squirrel.SerilogLogging" height="28"></a> |
+| `Squirrel.AspireIntegrations` | Aspire resources for infrastructure and observability tools. | <a href="https://www.nuget.org/packages/Squirrel.AspireIntegrations/"><img src="https://img.shields.io/nuget/v/Squirrel.AspireIntegrations.svg?style=flat&color=0078D4" alt="NuGet Squirrel.AspireIntegrations" height="28"></a> |
 
 See the [component documentation](docs/components/) and [package reference](docs/reference/packages.md) for detailed setup instructions. Package versions are released together and managed with Nerdbank.GitVersioning.
 
