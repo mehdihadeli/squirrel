@@ -6,10 +6,15 @@
     <Authors Condition="'$(Authors)' == ''">Squirrel contributors</Authors>
     <PackageDescription Condition="'$(PackageDescription)' == ''">Reusable .NET building blocks for cloud-native applications.</PackageDescription>
     <PackageTags Condition="'$(PackageTags)' == ''">dotnet;aspnetcore;microservices;cloud-native;infrastructure;persistence;messaging;opentelemetry;wolverine;postgres</PackageTags>
+    <PackageIcon Condition="'$(PackageIcon)' == ''">squirrel-package.png</PackageIcon>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <RepositoryUrl Condition="'$(RepositoryUrl)' == ''">https://github.com/mehdihadeli/Squirrel</RepositoryUrl>
     <RepositoryType Condition="'$(RepositoryType)' == ''">git</RepositoryType>
   </PropertyGroup>
+
+  <ItemGroup Condition="'$(IsPackable)' == 'true'">
+    <None Include="$(MSBuildThisFileDirectory)assets\squirrel-package.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
 
   <Target Name="ApplyReleasePackageVersion" AfterTargets="GetBuildVersion" Condition="'$(ReleasePackageVersion)' != ''">
     <PropertyGroup>
